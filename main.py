@@ -20,12 +20,23 @@ def find_student_by_id(student_id):
 
 
 def add_new_student(name, grades_str):
-    # Добавляет нового студента. Оценки передаются строкой через запятую (например: '4,5,3')
-    grades = [int(g.strip()) for g in grades_str.split(",")]
-    new_id = len(students_db) + 1
-    new_student = {"id": new_id, "name": name, "grades": grades}
-    students_db.append(new_student)
-    print(f" Студент {name} успешно добавлен с ID {new_id}!")
+    try: 
+        if name and name.strip():
+            grades = [int(g.strip()) for g in grades_str.split(",")]
+            new_id = len(students_db) + 1
+            new_student = {"id": new_id, "name": name, "grades": grades}
+            students_db.append(new_student)
+            print(f" Студент {name} успешно добавлен с ID {new_id}!")
+
+        elif not name: 
+            raise SyntaxError('Недопустимое значение')
+
+    except SyntaxError:
+        print("Пустая строка!")
+
+    except ValueError:
+        print("Введите числа, а не буквы в оценках!")
+
 
 
 def print_report():
