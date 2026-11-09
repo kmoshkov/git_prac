@@ -26,22 +26,22 @@ def find_student_by_id(student_id):
     return None
 
 def add_new_student(name, grades_str):
-    try: 
+    try:
         if name and name.strip():
             grades = [int(g.strip()) for g in grades_str.split(",")]
-            new_id = len(students_db) + 1
+            new_id = max((s["id"] for s in students_db), default=0) + 1
             new_student = {"id": new_id, "name": name, "grades": grades}
             students_db.append(new_student)
             print(f" Студент {name} успешно добавлен с ID {new_id}!")
 
-        elif not name: 
+        elif not name:
             raise SyntaxError('Недопустимое значение')
 
     except SyntaxError:
         print("Пустая строка!")
 
     except ValueError:
-        print("Введите числа, а не буквы в оценках!")
+        print("Введите числа!")
 
 
 
@@ -56,7 +56,7 @@ def delete_student(student_id):
     student = find_student_by_id(student_id)
 
     if student:
-        student_db.remove(student)
+        students_db.remove(student)
     else:
         print("Student not found")
 
