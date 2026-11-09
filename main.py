@@ -10,14 +10,12 @@ def get_average_grade(student):
     # Считает средний балл студента
     return sum(student["grades"]) / len(student["grades"])
 
-
 def find_student_by_id(student_id):
     # Ищет студента по ID
     for student in students_db:
-        if student["id"] == student_id:
+        if str(student["id"]) == str(student_id).strip():
             return student
     return None
-
 
 def add_new_student(name, grades_str):
     # Добавляет нового студента. Оценки передаются строкой через запятую (например: '4,5,3')
