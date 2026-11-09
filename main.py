@@ -52,6 +52,14 @@ def print_report():
         avg = get_average_grade(student)
         print(f"[{student['id']}] {student['name']} | Средний балл: {avg:.2f}")
 
+def delete_student(student_id):
+    student = find_student_by_id(student_id)
+
+    if student:
+        student_db.remove(student)
+    else:
+        print("Student not found")
+
 
 def main():
     while True:
@@ -59,7 +67,8 @@ def main():
         print("1. Показать отчет")
         print("2. Найти студента по ID")
         print("3. Добавить студента")
-        print("4. Выход")
+        print("4. Удаление")
+        print("5. Выход")
 
         choice = input("Выберите действие: ")
 
@@ -77,6 +86,9 @@ def main():
             grades = input("Оценки через запятую (например: 4,5,3): ")
             add_new_student(name, grades)
         elif choice == "4":
+            student_id = input("...")
+            delete_student(student_id)
+        elif choice == "5":
             break
         else:
             print("Неверный пункт меню")
