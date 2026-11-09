@@ -8,7 +8,15 @@ students_db = [
 
 def get_average_grade(student):
     # Считает средний балл студента
-    return sum(student["grades"]) / len(student["grades"])
+    total = 0
+    count = 0
+    for num in student["grades"]:
+        if type(num) == int:
+            total += num
+            count += 1
+    if count == 0:
+        return 0
+    return total / count
 
 def find_student_by_id(student_id):
     # Ищет студента по ID
